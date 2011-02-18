@@ -14,6 +14,10 @@ local lib, oldminor = LibStub:NewLibrary( "PhanxConfig-Header", MINOR_VERSION )
 if not lib then return end
 
 function lib.CreateHeader( parent, titleText, notesText, noPrefix )
+	assert( type(parent) == "table" and parent.GetFrameType, "PhanxConfig-Header: Parent is not a valid frame!" )
+	if type(titleText) ~= "string" then name = nil end
+	if type(notesText) ~= "string" then desc = nil end
+
 	if not titleText then
 		titleText = parent.name
 	end
