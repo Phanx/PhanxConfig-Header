@@ -8,21 +8,21 @@
 	its internals may change at any time without notice.
 ----------------------------------------------------------------------]]
 
-local MINOR_VERSION = tonumber( string.match( "$Revision$", "%d+" ) )
+local MINOR_VERSION = tonumber( strmatch( "$Revision$", "%d+" ) )
 
 local lib, oldminor = LibStub:NewLibrary( "PhanxConfig-Header", MINOR_VERSION )
 if not lib then return end
 
 function lib.CreateHeader( parent, titleText, notesText, noPrefix )
-	assert( type(parent) == "table" and parent.CreateFontString, "Parent is not a valid frame!" )
-	if type(titleText) ~= "string" then name = nil end
-	if type(notesText) ~= "string" then desc = nil end
+	assert( type( parent ) == "table" and parent.CreateFontString, "Parent is not a valid frame!" )
+	if type( titleText ) ~= "string" then titleText = nil end
+	if type( notesText ) ~= "string" then notesText = nil end
 
 	if not titleText then
 		titleText = parent.name
 	end
 	if titleText and not noPrefix and parent.parent then
-		titleText = string.format( "%s - %s", parent.parent, titleText )
+		titleText = format( "%s - %s", parent.parent, titleText )
 	end
 
 	local title = parent:CreateFontString( nil, "ARTWORK", "GameFontNormalLarge" )
