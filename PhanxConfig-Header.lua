@@ -43,4 +43,4 @@ function lib:New( parent, titleText, notesText, noPrefix )
 	return title, notes
 end
 
-lib.CreateHeader = function( ... ) return lib:New( ... ) end
+function lib.CreateHeader( ... ) return lib:New( ... ) end
