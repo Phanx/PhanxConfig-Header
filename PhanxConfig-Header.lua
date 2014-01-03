@@ -13,7 +13,7 @@ local MINOR_VERSION = tonumber( strmatch( "$Revision$", "%d+" ) )
 local lib, oldminor = LibStub:NewLibrary( "PhanxConfig-Header", MINOR_VERSION )
 if not lib then return end
 
-function lib.CreateHeader( parent, titleText, notesText, noPrefix )
+function lib:New( parent, titleText, notesText, noPrefix )
 	assert( type( parent ) == "table" and parent.CreateFontString, "Parent is not a valid frame!" )
 	if type( titleText ) ~= "string" then titleText = nil end
 	if type( notesText ) ~= "string" then notesText = nil end
@@ -42,3 +42,5 @@ function lib.CreateHeader( parent, titleText, notesText, noPrefix )
 
 	return title, notes
 end
+
+lib.CreateHeader = function( ... ) return lib:New( ... ) end
