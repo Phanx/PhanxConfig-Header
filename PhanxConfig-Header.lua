@@ -14,7 +14,7 @@ local lib, oldminor = LibStub:NewLibrary("PhanxConfig-Header", MINOR_VERSION)
 if not lib then return end
 
 function lib:New(parent, titleText, notesText, noPrefix)
-	assert(type(parent) == "table" and parent.CreateFontString, "Parent is not a valid frame!")
+	assert(type(parent) == "table" and type(rawget(parent, 0)) == "userdata", "PhanxConfig-Header: parent must be a frame")
 	if type(titleText) ~= "string" then titleText = nil end
 	if type(notesText) ~= "string" then notesText = nil end
 
