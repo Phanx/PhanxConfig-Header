@@ -10,7 +10,7 @@
 	credits line -- any modified versions must be renamed to avoid conflicts.
 ----------------------------------------------------------------------]]
 
-local MINOR_VERSION = 150111
+local MINOR_VERSION = 20150112
 
 local lib, oldminor = LibStub:NewLibrary("PhanxConfig-Header", MINOR_VERSION)
 if not lib then return end
@@ -18,7 +18,7 @@ if not lib then return end
 function lib:New(parent, titleText, notesText, noPrefix)
 	assert(type(parent) == "table" and type(rawget(parent, 0)) == "userdata", "PhanxConfig-Header: parent must be a frame")
 	if type(titleText) ~= "string" then titleText = nil end
-	if type(notesText) ~= "string" then notesText = nil end
+	if notesText ~= false and type(notesText) ~= "string" then notesText = nil end
 
 	if not titleText then
 		titleText = parent.name
@@ -33,14 +33,17 @@ function lib:New(parent, titleText, notesText, noPrefix)
 	title:SetJustifyH("LEFT")
 	title:SetText(titleText)
 
-	local notes = parent:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-	notes:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -8)
-	notes:SetPoint("RIGHT", 0, -16)
-	notes:SetHeight(32)
-	notes:SetJustifyH("LEFT")
-	notes:SetJustifyV("TOP")
-	notes:SetNonSpaceWrap(true)
-	notes:SetText(notesText)
+	local notes
+	if notesText ~= false then
+		notes = parent:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+		notes:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -8)
+		notes:SetPoint("RIGHT", 0, -16)
+		notes:SetHeight(32)
+		notes:SetJustifyH("LEFT")
+		notes:SetJustifyV("TOP")
+		notes:SetNonSpaceWrap(true)
+		notes:SetText(notesText)
+	end
 
 	return title, notes
 end
