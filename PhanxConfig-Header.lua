@@ -48,11 +48,13 @@ function lib:New(parent, titleText, notesText, versionText, noPrefix)
 
 	local version
 	if versionText then
-		version = parent:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+		version = parent:CreateFontString(nil, "ARTWORK", "GameFontNormalMed2")
 		version:SetPoint("TOPRIGHT", -16, -16)
-		version:SetJustifyH("LEFT")
+		version:SetHeight(title:GetHeight())
+		version:SetJustifyH("RIGHT")
+		version:SetJustifyV("BOTTOM")
 		version:SetFormattedText("%s: %s%s|r", GAME_VERSION_LABEL, HIGHLIGHT_FONT_COLOR_CODE, versionText)
-		title:SetPoint("TOPRIGHT", version, "TOPLEFT", -8, 0)
+		title:SetPoint("RIGHT", version, "LEFT", -8, 0)
 	end
 
 	local notes
